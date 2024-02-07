@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import os
+import time
 import warnings
 import data_req
 warnings.filterwarnings("ignore")
@@ -24,5 +25,7 @@ input_pgn_file = st.file_uploader(label="Upload PGN", type=None, accept_multiple
 
 if st.button("Submit"):
     data_req.data_request(username, chess_website)
+    data_req.wait_for_file(username)
+    data_req.convert_to_csv(username)
     print("Button clicked!")
 
