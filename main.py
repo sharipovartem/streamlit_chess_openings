@@ -5,6 +5,7 @@ import os
 import time
 import warnings
 import data_req
+import dashboards
 warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="Chess Openings Dashboard", layout="wide", page_icon=":chess_pawn:")
@@ -16,16 +17,13 @@ chess_website = st.selectbox(label="Select chess website", options=["chess.com",
 username = st.text_input(label="Enter your username")
 
 time_control = st.selectbox(label="Select time control", options=["Blitz", "Bullet", "Rapid", "All"])
-st.text("OR")
-
-input_pgn_file = st.file_uploader(label="Upload PGN", type=None, accept_multiple_files=False, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-
-
-#button = mr.Button(label="Submit", style="primary"
 
 if st.button("Submit"):
+    with st.spinner("Loading your profile..."):
+        time.sleep(5)
     data_req.data_request(username, chess_website)
     data_req.wait_for_file(username)
     data_req.convert_to_csv(username)
+    st.success("Done!")
     print("Button clicked!")
 

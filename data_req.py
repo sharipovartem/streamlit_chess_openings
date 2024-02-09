@@ -89,3 +89,5 @@ def wait_for_file(username: str) -> None:
         if time_counter > time_to_wait:
             print(f"File 'players_data/{username}.pgn' still does not exist after {time_to_wait} seconds.")
             break
+
+
